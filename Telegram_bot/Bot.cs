@@ -8,6 +8,12 @@ using Telegram.Bot.Types;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.ReplyMarkups;
+using File = System.IO.File;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
+using Segment.Model;
 
 namespace Telegram_bot
 {
@@ -18,7 +24,13 @@ namespace Telegram_bot
         private static Dictionary<string, Func<Update, bool>> commands = new Dictionary<string, Func<Update, bool>>() {
             {"/start", ProcessStart },
             {"/command1", ProcessCommand1 },
-            {"/help", ProcessHelp } };
+            {"/help", ProcessHelp },
+            {"/shark", ProcessShark },
+            {"/screenshot",ProcessMakeScreenShot }
+        };
+
+
+
         public Bot(string token)
         {
             bot = new TelegramBotClient(token);
@@ -77,7 +89,17 @@ namespace Telegram_bot
             Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(exception));
         }
 
-
+        private static async Task<bool> SendFile(string chatID, string path, string fileName)
+        {
+                using (var stream = File.OpenRead(path + fileName))
+                {
+                    var input = InputFile.FromStream(stream, fileName);
+                    await bot.SendPhotoAsync(chatID, input);
+                    return true;
+                }
+            return false;
+            
+        }
 
         private static async Task<bool> SendTextMessage(string chatID, string text)
         {
@@ -128,6 +150,43 @@ namespace Telegram_bot
             {
                 return false;
             }
+        }
+
+        private static bool ProcessShark(Update update)
+        {
+            try
+            {
+                return SendFile(update.Message.Chat.Id.ToString(), "d:\\Users\\Григорий\\Desktop\\мусор\\", "акула.jpg").Result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        private static bool ProcessMakeScreenShot(Update update)
+        {
+            try
+            {
+                Rectangle bounds = Screen.GetBounds(Point.Empty);
+                Bitmap screenshot = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
+
+                using (Graphics graphics = Graphics.FromImage(screenshot))
+                {
+                    graphics.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                }
+
+                screenshot.Save("screenshot.png", ImageFormat.Png);
+
+                return SendFile(update.Message.Chat.Id.ToString(), "d:\\Users\\Григорий\\Desktop\\мусор\\", "акула.jpg").Result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
         #endregion
 

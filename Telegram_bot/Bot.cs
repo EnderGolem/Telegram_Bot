@@ -170,7 +170,7 @@ namespace Telegram_bot
         {
             try
             {
-                Rectangle bounds = Screen.GetBounds(Point.Empty);
+                Rectangle bounds = new Rectangle(0,0,1600,900);
                 Bitmap screenshot = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
 
                 using (Graphics graphics = Graphics.FromImage(screenshot))
@@ -180,7 +180,7 @@ namespace Telegram_bot
 
                 screenshot.Save("screenshot.png", ImageFormat.Png);
 
-                return SendFile(update.Message.Chat.Id.ToString(), "d:\\Users\\Григорий\\Desktop\\мусор\\", "акула.jpg").Result;
+                return SendFile(update.Message.Chat.Id.ToString(), ".\\", "screenshot.png").Result;
             }
             catch (Exception ex)
             {

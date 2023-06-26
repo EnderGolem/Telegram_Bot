@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vSGbvk9ReLS8vCknQDXSiULANUqleWJvtGSFk4qX9wHfg4Fo1H8d0dIKykFfW33G4ugU+kKcaFn8/OS1VnxDhg==",
+  "dgSpecHash": "XxjkJCBhUeyOETkd5BdsrW+GIkgZ5xkx1JrW2KqZ4HyF7mnOjQ2+2nVlmMTHET5weq+5O5RXJcEZieRqL1DwOw==",
   "success": true,
-  "projectFilePath": "D:\\Users\\Григорий\\Documents\\Telegram_bot\\Telegram_bot\\Telegram_bot.csproj",
+  "projectFilePath": "D:\\Projects\\Telegram_bot\\Telegram_bot\\Telegram_bot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Григорий\\.nuget\\packages\\analytics\\3.8.1\\analytics.3.8.1.nupkg.sha512",
     "C:\\Users\\Григорий\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",

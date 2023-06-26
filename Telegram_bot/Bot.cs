@@ -176,9 +176,11 @@ namespace Telegram_bot
                 {
                     graphics.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
                 }
-                screenshot.Save("screenshot.png", ImageFormat.Png);
+                string fileName = DateTime.UtcNow.Second.ToString()    + "scr.png";
+                Console.WriteLine($"ChatID {update.Message.Chat.Id} Create filename: {fileName}");
+                screenshot.Save(fileName, ImageFormat.Png);
 
-                return SendFile(update.Message.Chat.Id.ToString(), ".\\", "screenshot.png").Result;
+                return SendFile(update.Message.Chat.Id.ToString(), ".\\", fileName).Result;
             }
             catch (Exception ex)
             {
